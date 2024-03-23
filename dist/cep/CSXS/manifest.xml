@@ -36,7 +36,7 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       </Lifecycle>
       <UI>
         <Type>Panel</Type>
-        <Menu>Agrarvolution Workflow Tools</Menu>
+        <Menu>Workflow Tools</Menu>
         <Geometry>
           <Size>
             <Width>600</Width>

@@ -28,7 +28,7 @@ const config: CEP_Config = {
     {
       mainPath: "./main/index.html",
       name: "main",
-      panelDisplayName: "Agrarvolution Workflow Tools",
+      panelDisplayName: "Workflow Tools",
       autoVisible: true,
       width: 600,
       height: 650,
@@ -40,10 +40,10 @@ const config: CEP_Config = {
     sourceMap: true,
   },
   zxp: {
-    country: "US",
-    province: "CA",
-    org: "MyCompany",
-    password: "mypassword",
+    country: "AT",
+    province: "OOE",
+    org: "Agrarvolution",
+    password: "",
     tsa: "http://timestamp.digicert.com/",
     sourceMap: false,
     jsxBin: "off",
