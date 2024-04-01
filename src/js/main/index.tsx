@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { initBolt } from "../lib/utils/bolt";
-
+import { initBolt, } from "../lib/utils/bolt";
+import "../css/index.scss";
 
 import Main from "./main";
 

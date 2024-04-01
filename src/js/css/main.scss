@@ -1,0 +1,9 @@
+* {
+    color: $font;
+    font-family: system-ui, -apple-system, sans-serif;
+}
+
+.app {
+    background-color: var(--background-color, #444);
+    padding: 1rem .4rem;
+}
