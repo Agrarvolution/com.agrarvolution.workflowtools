@@ -2,6 +2,17 @@ const Main = () => {
   return (
     <div>
       <h1 style={{ color: "#ff5b3b" }}>Welcome to Bolt CEP!</h1>
+      <Accordion defaultActiveKey="1" storageKey="1">
+        <Accordion.Item eventKey="1" header="This is a header.">
+          Content
+        </Accordion.Item>
+        <Accordion.Item eventKey="2" header="This is a second header.">
+          Content
+        </Accordion.Item>
+        <Accordion.Item eventKey="3" header="This is a third header.">
+          Content
+        </Accordion.Item>
+      </Accordion>
     </div>
   );
 };

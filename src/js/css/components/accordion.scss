@@ -1,0 +1,67 @@
+.accordion {
+    --accordion-open-animation-duration: 0.2s;
+    margin-block: 1rem;
+}
+
+.accordion-header {
+    --border-thickness: .05rem;
+
+    position: relative;
+    font-size: 1.1rem;
+    font-weight: 600;
+
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    // border: 0.1rem solid; //doesn't work due to non collapsing borders, second selector was visible in animation
+    box-shadow:
+        var(--border-thickness) 0 0 0 var(--font-color),
+        var(--border-thickness) 0 0 0 var(--font-color),
+        0 var(--border-thickness) 0 0 var(--font-color),
+        var(--border-thickness) var(--border-thickness) 0 0 var(--font-color),
+        /* Just to fix the corner */
+        var(--border-thickness) 0 0 0 var(--font-color) inset,
+        0 var(--border-thickness) 0 0 var(--font-color) inset;
+    user-select: none;
+    backdrop-filter: none;
+    transition: backdrop-filter var(--accordion-open-animation-duration, 0) ease;
+}
+
+.accordion-header>button {
+    padding: .75rem .5rem;
+    flex-grow: 1;
+}
+
+.accordion-header>div {
+    font-size: 0.9rem;
+    padding-block: .8rem;
+}
+
+.accordion-openIndicator {
+    margin-inline: 1rem;
+    transform: rotate(0deg);
+    transition: transform var(--accordion-open-animation-duration, 0) ease;
+}
+
+.accordion--isOpen .accordion-openIndicator {
+    transform: rotate(90deg);
+}
+
+.accordion-header:hover {
+    backdrop-filter: brightness(125%);
+    transition: backdrop-filter 0.1s ease;
+}
+
+.accordion-body {
+    margin: 1rem .5rem;
+    transition: height var(--accordion-open-animation-duration, 0) ease,
+        margin var(--accordion-open-animation-duration, 0) ease;
+}
+
+.accordion-item:not(.accordion--isOpen) .accordion-body {
+    margin: 0 .5rem;
+    height: 0 !important;
+    overflow: hidden;
+}
