@@ -14,7 +14,23 @@ export default function useArray<T>(defaultValue: T[]) {
         setArray(a => [...a, element]);
     }
 
-    function filter(callback: (value: T, index: number, array: T[]) => number) {
+    function merge(newArray: T[]) {
+        setArray(a => [...a, ...newArray]);
+    }
+
+    function combine(element: T | T[] | undefined | null) {
+        if (element == null || element === undefined) {
+            return;
+        }
+
+        if (element instanceof Array) {
+            merge(element);
+            return;
+        }
+        push(element);
+    }
+
+    function filter(callback: (value: T, index?: number, array?: T[]) => boolean) {
         setArray(a => a.filter(callback));
     }
 
@@ -30,9 +46,32 @@ export default function useArray<T>(defaultValue: T[]) {
         setArray(a => [...a.slice(0, index), ...a.slice(index + 1, a.length)]);
     }
 
+    function removeDuplicates() {
+        setArray(Array.from(new Set(array)));
+    }
+
     function clear() {
         setArray([]);
     }
 
-    return { array, set: setArray, push, filter, update, remove, clear }
+    function loadFromStorage(key:string): boolean {
+        const storageJSON = localStorage.getItem(key);
+        try {
+            if (storageJSON == null) {
+                return false;
+            }
+            const parsed = JSON.parse(storageJSON);
+            if (parsed.length === undefined) {
+                return false;
+            }
+
+            setArray(JSON.parse(storageJSON)); //type not garantueed??
+            return true;
+        } catch (e) {
+            console.error(e);
+        }
+        return false;
+    }
+
+    return { array, set: setArray, push, merge, combine, filter, update, removeDuplicates, remove, clear, loadFromStorage };
 }
