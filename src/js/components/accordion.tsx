@@ -25,7 +25,7 @@ const ASAlwaysActiveKey = '-always-active';
 const Accordion = ({ children, defaultActiveKey, storageKey }:
     React.PropsWithChildren<{
         defaultActiveKey?: AccordionStateKey,
-        storageKey: string
+        storageKey?: string
     }>) => {
 
     if (defaultActiveKey == null) {
@@ -35,8 +35,10 @@ const Accordion = ({ children, defaultActiveKey, storageKey }:
         defaultActiveKey = [defaultActiveKey];
     }
 
-    const [activeKey, setActiveKey] = useLocalStorage<string>(ASPrefix + storageKey + ASActiveKey, "");
-    const alwaysActiveKey = useArray<string>(defaultActiveKey, ASPrefix + storageKey + ASAlwaysActiveKey);
+    // by omiting the storage key, no peristance in local storage is used
+    const [activeKey, setActiveKey] = storageKey ? useLocalStorage<string>(ASPrefix + storageKey + ASActiveKey, "") : useState<string>('');
+    const alwaysActiveKey = useArray<string>(defaultActiveKey, 
+        storageKey ? ASPrefix + storageKey + ASAlwaysActiveKey : undefined);
 
 
 
