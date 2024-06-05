@@ -5,17 +5,18 @@
  * 
  * Modified for Typescript use.
  */
-import { useState } from "react"
+import { useState } from "react";
+import { useLocalStorage } from "./useStorage";
 
-export default function useArray<T>(defaultValue: T[]) {
-    const [array, setArray] = useState(defaultValue);
+export default function useArray<T>(defaultValue: T[], storageKey?: string) {
+    const [array, setArray] = storageKey ? useLocalStorage(storageKey,defaultValue) : useState(defaultValue);
 
     function push(element: T) {
-        setArray(a => [...a, element]);
+        setArray((a : T []) => [...a, element]);
     }
 
     function merge(newArray: T[]) {
-        setArray(a => [...a, ...newArray]);
+        setArray((a : T []) => [...a, ...newArray]);
     }
 
     function combine(element: T | T[] | undefined | null) {
@@ -31,11 +32,11 @@ export default function useArray<T>(defaultValue: T[]) {
     }
 
     function filter(callback: (value: T, index?: number, array?: T[]) => boolean) {
-        setArray(a => a.filter(callback));
+        setArray((a : T []) => a.filter(callback));
     }
 
     function update(index: number, newElement: T) {
-        setArray(a => [
+        setArray((a : T []) => [
             ...a.slice(0, index),
             newElement,
             ...a.slice(index + 1, a.length),
@@ -43,7 +44,7 @@ export default function useArray<T>(defaultValue: T[]) {
     }
 
     function remove(index: number) {
-        setArray(a => [...a.slice(0, index), ...a.slice(index + 1, a.length)]);
+        setArray((a : T []) => [...a.slice(0, index), ...a.slice(index + 1, a.length)]);
     }
 
     function removeDuplicates() {
@@ -54,24 +55,5 @@ export default function useArray<T>(defaultValue: T[]) {
         setArray([]);
     }
 
-    function loadFromStorage(key:string): boolean {
-        const storageJSON = localStorage.getItem(key);
-        try {
-            if (storageJSON == null) {
-                return false;
-            }
-            const parsed = JSON.parse(storageJSON);
-            if (parsed.length === undefined) {
-                return false;
-            }
-
-            setArray(JSON.parse(storageJSON)); //type not garantueed??
-            return true;
-        } catch (e) {
-            console.error(e);
-        }
-        return false;
-    }
-
-    return { array, set: setArray, push, merge, combine, filter, update, removeDuplicates, remove, clear, loadFromStorage };
+    return { array, set: setArray, push, merge, combine, filter, update, removeDuplicates, remove, clear};
 }

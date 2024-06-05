@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, createContext, useContext, useMemo } from 
 import { useLocalStorage } from "../hooks/useStorage";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLock, faUnlock, faChevronRight } from '@fortawesome/free-solid-svg-icons'
-import useArrayStorage from "../hooks/useArrayStorage";
+import useArray from "../hooks/useArray";
 
 //import useLocalStorage from "../lib/utils/localStorage";
 
@@ -28,27 +28,15 @@ const Accordion = ({ children, defaultActiveKey, storageKey }:
         storageKey: string
     }>) => {
 
-
-    // useMemo(() => {
-    //     if (defaultActiveKey == null || defaultActiveKey === undefined) {
-    //         defaultActiveKey = [];
-    //     }
-    //     if (!(defaultActiveKey instanceof Array)) {
-    //         defaultActiveKey = [defaultActiveKey];
-    //     }
-
-    //     //alwaysActiveKey.combine(defaultActiveKey);
-
-    // }, []);
     if (defaultActiveKey == null) {
         defaultActiveKey = [];
     }
     if (!(defaultActiveKey instanceof Array)) {
         defaultActiveKey = [defaultActiveKey];
     }
-    
+
     const [activeKey, setActiveKey] = useLocalStorage<string>(ASPrefix + storageKey + ASActiveKey, "");
-    const alwaysActiveKey = useArrayStorage<string>(ASPrefix + storageKey + ASAlwaysActiveKey, defaultActiveKey);
+    const alwaysActiveKey = useArray<string>(defaultActiveKey, ASPrefix + storageKey + ASAlwaysActiveKey);
 
 
 
