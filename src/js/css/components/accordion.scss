@@ -9,7 +9,7 @@
     position: relative;
     font-size: 1.1rem;
     font-weight: 600;
-
+    height: 2.75rem;
 
     display: flex;
     justify-content: space-between;
@@ -29,14 +29,16 @@
     transition: backdrop-filter var(--accordion-open-animation-duration, 0) ease;
 }
 
-.accordion-header>button {
-    padding: .75rem .5rem;
+.accordion-header > * {
+    height: 100%
+}
+.accordion-header-open {
+    padding-inline: .5rem;
     flex-grow: 1;
 }
 
-.accordion-header>div {
+.accordion-header-lock {
     font-size: 0.9rem;
-    padding-block: .8rem;
 }
 
 .accordion-openIndicator {
@@ -51,6 +53,7 @@
 
 .accordion-header:hover {
     backdrop-filter: brightness(125%);
+    filter: brightness(115%);
     transition: backdrop-filter 0.1s ease;
 }
 

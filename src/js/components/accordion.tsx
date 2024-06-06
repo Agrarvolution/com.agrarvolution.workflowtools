@@ -110,11 +110,11 @@ const AccordionHeader = ({ children, onClick, onDoubleClick, locked }: React.Pro
 }>) => {
     const accordionCallback = useContext(AccordionContext);
     return (<h2 className='accordion-header'>
-        <button onClick={onClick} onDoubleClick={onDoubleClick}>{children}</button>
-        <div onClick={onDoubleClick}>
+        <button className='accordion-header-open' onClick={onClick} onDoubleClick={onDoubleClick}>{children}</button>
+        <button onClick={onDoubleClick} className='accordion-header-lock'>
             <FontAwesomeIcon icon={locked ? faLock : faUnlock}></FontAwesomeIcon>
             <FontAwesomeIcon className="accordion-openIndicator" icon={faChevronRight}></FontAwesomeIcon>
-        </div>
+        </button>
     </h2>);
 };
 
