@@ -1,10 +1,8 @@
 import { useEffect, useRef, useState, createContext, useContext, useMemo } from "react";
-import { useLocalStorage } from "../hooks/useStorage";
+import { useLocalStorage } from "usehooks-ts";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLock, faUnlock, faChevronRight } from '@fortawesome/free-solid-svg-icons'
 import useArray from "../hooks/useArray";
-
-//import useLocalStorage from "../lib/utils/localStorage";
 
 const AccordionContext = createContext({
     accordionItemIsOpen: (accordionItemKey: string): boolean => { return false; },
@@ -68,7 +66,7 @@ const Accordion = ({ children, defaultActiveKey, storageKey }:
         }
     }
     function accordionItemIsFixed(accordionItemKey: string): boolean {
-        return alwaysActiveKey.array.includes(accordionItemKey);
+        return alwaysActiveKey.array?.includes(accordionItemKey);
     }
 
 

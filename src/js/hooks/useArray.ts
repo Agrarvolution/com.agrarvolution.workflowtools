@@ -6,10 +6,26 @@
  * Modified for Typescript use.
  */
 import { useState } from "react";
-import { useLocalStorage } from "./useStorage";
+import { useLocalStorage  } from "usehooks-ts";
 
 export default function useArray<T>(defaultValue: T[], storageKey?: string) {
-    const [array, setArray] = storageKey ? useLocalStorage(storageKey,defaultValue) : useState(defaultValue);
+    const [array, setArray] = storageKey ? useLocalStorage(storageKey,defaultValue, {
+        deserializer: (value: string) : T[] => {
+            if (value == null || value === undefined) {
+                return [];
+            }
+
+            try {
+                const raw = JSON.parse(value);
+                if (raw instanceof Array) {
+                    return raw;
+                }
+            } catch (e) {
+                console.error(e);
+            }         
+            return [];
+        }
+    }) : useState(defaultValue); //@ToDo switch to useLocalStorage from usehooks-ts
 
     function push(element: T) {
         setArray((a : T []) => [...a, element]);
