@@ -1,9 +1,11 @@
 * {
     color: $font;
     font-family: system-ui, -apple-system, sans-serif;
+    font-size: 10pt; //gets UI size close to Premiere Pro
 }
 
 .app {
     background-color: var(--background-color, #444);
     padding: 1rem .4rem;
+    
 }
