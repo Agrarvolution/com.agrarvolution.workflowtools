@@ -1,5 +1,6 @@
-@import "./reset.css";
-@import "./variables.scss";
-@import "./main.scss";
+@use "./reset.css";
+@forward "./variables.scss";
+@use "./main.scss";
 
-@import "./components/accordion.scss";
+@use "./components/accordion.scss";
+@use "./components/searchInput.scss";
